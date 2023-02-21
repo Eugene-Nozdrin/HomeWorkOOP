@@ -84,7 +84,6 @@ class Reviewer(Mentor): # проверяющие
               f'Фамилия: {self.surname}'
         return res
 
-
 # студент №1
 best_student = Student('Василий', 'Петров', 'your_gender')
 best_student.courses_in_progress += ['Python', 'Java']
@@ -107,7 +106,7 @@ cool_mentor2.courses_attached += ['Java']
 
 # лектор №1
 cool_lecturer = Lecturer('Анна', 'Иванова')
-cool_lecturer.courses_attached += ['Python']
+cool_lecturer.courses_attached += ['Python', 'Java']
 
 # лектор №2
 cool_lecturer2 = Lecturer('Валентина', 'Петрова')
@@ -152,17 +151,17 @@ best_student2.rate_lec(cool_lecturer, 'Java', 4)
 best_student2.rate_lec(cool_lecturer2, 'Java', 7)
 
 print(best_student)
-print('-----0--------')
+print('------------')
 print(best_student2)
-print('------1-------')
+print('-------------')
 print(cool_mentor)
-print('------2-------')
+print('-------------')
 print(cool_mentor2)
-print('------3-------')
+print('------------')
 print(cool_lecturer)
-print('-----4--------')
+print('-------------')
 print(cool_lecturer2)
-print('------5-------')
+print('-------------')
 print(cool_lecturer > cool_lecturer2)
 print(best_student > best_student2)
 
@@ -173,7 +172,8 @@ def average_st(all_stud, curs):
     for st in all_stud:
         if curs in st.grades:
             grat.extend(st.grades[curs])
-    return (f'Средняя оценка всех студентов по курсу {curs}: {round(sum(grat) / len(grat), 1)}')
+    if len(grat) != 0:
+        return (f'Средняя оценка всех студентов по курсу {curs}: {round(sum(grat) / len(grat), 1)}')
 average_st(all_stud,'Python')
 average_st(all_stud, 'Java')
 
@@ -182,10 +182,11 @@ def average_lec(all_lec, curs):
     for lec in all_lec:
         if curs in lec.lec_grades:
             grat.extend(lec.lec_grades[curs])
-    return (f'Средняя оценка всех лекторов по курсу {curs} {round(sum(grat) / len(grat), 1)}')
+    if len(grat) != 0:
+        return (f'Средняя оценка всех лекторов по курсу {curs} {round(sum(grat) / len(grat), 1)}')
 
-average_st(all_stud,'Python')
-average_st(all_stud, 'Java')
+print(average_st(all_stud,'Python'))
+print(average_st(all_stud, 'Java'))
 
 print(average_lec(all_lec, 'Python'))
 print(average_lec(all_lec, 'Java'))
